@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Team List{% endblock %}
+
+{% block body %}
+    <h1>Team List</h1>
+    <br>
+    <a href="{{ path('team_new') }}" style="font-size:15px;">Create new Team!</a>
+    <br> <br>
+    
+    
+   <table align="center" style="font-size:15px;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Pokemon List</th>
+                <th>Sum Experiences</th>
+                <th>Types</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for team in teams|sort((a, b) => b.id <=> a.id) %}
+            <tr>
+                <td>{{ team.name }}</td>
+                
+                <td>
+                {% for pokemon in team.pokemon_list %}
+                   |{{pokemon.name}}| 
+                {% endfor %}
+                </td>                  
+                
+                <td>
+                  {{ team.sum_experiences}}                
+                </td>
+
+                <td>
+                  {{team.types}}                
+                </td>
+                
+                <td>
+                    <a href="{{ path('team_edit', {'id': team.id}) }}">Edit Team</a>
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+{% endblock %}

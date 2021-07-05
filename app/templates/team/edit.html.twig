@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Team{% endblock %}
+
+{% block body %}
+    <h1>Edit Team</h1>
+
+    {{ include('team/_form.html.twig') }}
+   <br>
+   
+       <div> Pokemon List: </div>
+    <br> 
+        
+    <table align="center" style="font-size:15px;">
+         <thead>
+            <tr>
+               <th>Name</th>
+               <th>Experience</th>
+               <th>Abilities</th>
+               <th>Types</th>
+               
+            </tr>
+         </thead>
+         <tbody>
+         {% for pokemon in team.pokemon_list %}
+            <tr>
+               <td>{{pokemon.name}}</td>
+               <td>{{pokemon.base_experience}}</td>
+               <td>
+               [
+                  {% for ability in pokemon.ability_list %}
+                     |{{ability.name}}|
+                  {% endfor %}
+               ]
+               </td>
+               <td>
+               [
+                  {% for type in pokemon.type_list %}
+                     |{{type.name}}|
+                  {% endfor %}
+               ]
+               </td>
+            </tr>
+         {% endfor %}
+         </tbody>
+
+    </table>
+   
+   <br>
+    {{ include('team/_delete_form.html.twig') }}
+   <br> <br>
+    <a href="{{ path('team_index') }}">back to list</a>
+    <br>
+{% endblock %}
